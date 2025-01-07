@@ -3,7 +3,10 @@ const multer = require("multer");
 const cors = require("cors");
 const fs = require("fs");
 const { BlobServiceClient } = require("@azure/storage-blob");
-require("dotenv").config();
+
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
 
 const app = express();
 const port = 3001;
@@ -56,5 +59,5 @@ app.post("/upload", upload.single("file"), async (req, res) => {
 });
 
 app.listen(port, () =>
-  console.log(`Server läuft auf http://localhost:${port}`)
+  console.log(`Server läuft auf ${port}`)
 );
